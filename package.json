@@ -1,0 +1,12 @@
+{
+  "name": "ibrahim-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ibrahim Hossan Creative Portfolio with Studio Admin Dashboard, Turso LibSQL persistence, and Vercel Serverless API",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0"
+  }
+}

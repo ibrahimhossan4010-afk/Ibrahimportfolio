@@ -124,13 +124,21 @@ function initSidebarMobile() {
 
 // Authentication
 async function checkInitialSession() {
+  const warningEl = document.getElementById('server-warning');
+  const showDbWarning = () => {
+    if (!warningEl) return;
+    warningEl.innerHTML = '<strong>Database Setup Needed:</strong> Add <code>TURSO_DATABASE_URL</code> and <code>TURSO_AUTH_TOKEN</code> in Vercel → Settings → Environment Variables, then redeploy.';
+    warningEl.classList.remove('hidden');
+  };
+
   if (!authToken) {
-    // Check if backend server is reachable
     try {
       const ping = await fetch('/api/auth/verify');
       if (!ping.ok) throw new Error();
+      const json = await ping.json();
+      if (json.dbConfigured === false) showDbWarning();
     } catch (_) {
-      document.getElementById('server-warning')?.classList.remove('hidden');
+      warningEl?.classList.remove('hidden');
     }
     showLoginView();
     return;
@@ -142,6 +150,11 @@ async function checkInitialSession() {
     });
     if (!res.ok) throw new Error();
     const json = await res.json();
+    if (json.dbConfigured === false) {
+      showDbWarning();
+      showLoginView();
+      return;
+    }
     if (json.authenticated) {
       await loadAdminData();
       showAppView();
@@ -151,7 +164,7 @@ async function checkInitialSession() {
       showLoginView();
     }
   } catch (_) {
-    document.getElementById('server-warning')?.classList.remove('hidden');
+    warningEl?.classList.remove('hidden');
     showLoginView();
   }
 }
@@ -899,22 +912,53 @@ function initFormHandlers() {
       showToast(json.error || 'Could not update password', 'error');
       return;
     }
+    if (json.token) {
+      authToken = json.token;
+      sessionStorage.setItem('ih_admin_token', authToken);
+    }
     e.target.reset();
     showToast('Admin password updated successfully!');
   });
 }
 
-async function uploadImageFile(file) {
-  if (file.size > 5 * 1024 * 1024) {
-    showToast('Image exceeds 5MB limit', 'error');
-    return null;
-  }
-  const dataUrl = await new Promise((resolve, reject) => {
+async function compressImageToDataUrl(file, maxDim = 1600, quality = 0.85) {
+  const rawDataUrl = await new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+
+  if (file.size <= 2.2 * 1024 * 1024 || String(file.type).includes('svg') || String(file.type).includes('gif')) {
+    return rawDataUrl;
+  }
+
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => resolve(rawDataUrl);
+    img.src = rawDataUrl;
+  });
+}
+
+async function uploadImageFile(file) {
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('Image exceeds 10MB limit', 'error');
+    return null;
+  }
+  const dataUrl = await compressImageToDataUrl(file);
+  if (dataUrl.length > 4.2 * 1024 * 1024) {
+    showToast('Compressed image still exceeds 3MB upload limit', 'error');
+    return null;
+  }
 
   const res = await fetch('/api/upload-image', {
     method: 'POST',
