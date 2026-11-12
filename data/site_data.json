@@ -1,0 +1,186 @@
+{
+  "profile": {
+    "name": "Ibrahim Hossan",
+    "brandShort": "IH",
+    "tagline": "Creative & Growth",
+    "roleTitle": "Video Editor | Graphic Designer | Meta Marketing Specialist",
+    "availability": "Available for Freelance & Long-Term Projects",
+    "heroTitle1": "Visuals That Captivate.",
+    "heroTitle2": "Campaigns That Convert.",
+    "heroSubtitle": "I am Ibrahim Hossan—a creative specialist combining high-retention Video Editing, high-converting Graphics Design, and ROI-driven Meta Marketing to turn casual viewers into loyal paying customers.",
+    "aboutShort": "I am a dedicated creative professional specializing in high-impact Video Editing, Graphic Design, and ROI-focused Meta Marketing.",
+    "aboutStory": "With a deep passion for visual storytelling and digital growth, I help content creators, businesses, and personal brands cut through the digital noise. My work bridges the gap between captivating creative media and cold, measurable business revenue.",
+    "phone": "01986494589",
+    "whatsapp": "8801986494589",
+    "email": "ibrahimhossan.connect@gmail.com",
+    "photo": "assets/images/ibrahim.jpg"
+  },
+  "stats": [
+    {
+      "value": 120,
+      "suffix": "+",
+      "label": "Projects Completed",
+      "accent": false
+    },
+    {
+      "value": 4.2,
+      "suffix": "x",
+      "label": "Average ROAS Delivered",
+      "accent": true
+    },
+    {
+      "value": 98,
+      "suffix": "%",
+      "label": "Client Retention & Trust",
+      "accent": false
+    },
+    {
+      "value": 24,
+      "suffix": "h",
+      "label": "Avg. Turnaround Time",
+      "accent": false
+    }
+  ],
+  "portfolio": [
+    {
+      "id": 1,
+      "title": "High-Energy Tech Product Reel",
+      "category": "video",
+      "categoryLabel": "Video Editing",
+      "thumbnail": "assets/images/project-video-1.svg",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+      "imageUrl": "",
+      "description": "Dynamic fast-paced short-form video edit featuring custom motion graphics, sound design, sound FX, and punchy captions engineered for maximum Instagram Reel & TikTok retention.",
+      "metrics": "450K+ Views | 18% Engagement Rate",
+      "tools": [
+        "Adobe Premiere Pro",
+        "After Effects",
+        "CapCut Pro"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Viral YouTube Documentary Style Edit",
+      "category": "video",
+      "categoryLabel": "Video Editing",
+      "thumbnail": "assets/images/project-video-2.svg",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+      "imageUrl": "",
+      "description": "Long-form YouTube video edit with dynamic map animations, engaging b-roll pacing, cinematic color grading, and crisp audio leveling.",
+      "metrics": "1.2M Views | 68% Retention Rate",
+      "tools": [
+        "Premiere Pro",
+        "DaVinci Resolve",
+        "Audition"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "High-CTR YouTube Thumbnails Pack",
+      "category": "graphics",
+      "categoryLabel": "Graphics Design",
+      "thumbnail": "assets/images/project-thumb-1.svg",
+      "videoUrl": "",
+      "imageUrl": "assets/images/project-thumb-1.svg",
+      "description": "A series of psychology-driven, high-contrast YouTube thumbnails crafted to drastically increase Click-Through-Rate (CTR) across education and business channels.",
+      "metrics": "+14.2% Average CTR Increase",
+      "tools": [
+        "Adobe Photoshop",
+        "Lightroom"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "E-Commerce Meta Ad Creatives & Video Ads",
+      "category": "meta",
+      "categoryLabel": "Meta Marketing",
+      "thumbnail": "assets/images/project-meta-1.svg",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+      "imageUrl": "",
+      "description": "Full-funnel Meta advertising campaign featuring high-converting UGC style video hooks, carousel designs, and precision audience targeting.",
+      "metrics": "4.2x ROAS | $24,000+ Revenue Generated",
+      "tools": [
+        "Meta Ads Manager",
+        "Premiere Pro",
+        "Photoshop"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Luxury Brand Identity & Social Kit",
+      "category": "graphics",
+      "categoryLabel": "Graphics Design",
+      "thumbnail": "assets/images/project-branding-1.svg",
+      "videoUrl": "",
+      "imageUrl": "assets/images/project-branding-1.svg",
+      "description": "Complete visual identity kit including logo design, color typography guidelines, Instagram grid templates, and promotional banner assets.",
+      "metrics": "Full Brand Launch Suite",
+      "tools": [
+        "Adobe Illustrator",
+        "Photoshop"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Lead Generation Campaign for EdTech",
+      "category": "meta",
+      "categoryLabel": "Meta Marketing",
+      "thumbnail": "assets/images/project-meta-2.svg",
+      "videoUrl": "",
+      "imageUrl": "assets/images/project-meta-2.svg",
+      "description": "Comprehensive Facebook & Instagram lead ad campaign with custom landing page integration, Meta Pixel tracking, and CBO scaling strategy.",
+      "metrics": "1,850+ Qualified Leads | $1.20 Cost Per Lead",
+      "tools": [
+        "Meta Ads Manager",
+        "Pixel / CAPI",
+        "Analytics"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Tariq Mahmud",
+      "initials": "TM",
+      "role": "Content Creator & Founder",
+      "quote": "Ibrahim took our raw footage and turned it into high-octane Instagram Reels that doubled our organic reach within 3 weeks. His pacing and sound effects are top tier!"
+    },
+    {
+      "id": 2,
+      "name": "Nadia Rahman",
+      "initials": "NR",
+      "role": "E-Commerce Brand Manager",
+      "quote": "The YouTube thumbnails and ad graphics Ibrahim designed increased our click-through rate dramatically. He understands viewer psychology better than most designers."
+    },
+    {
+      "id": 3,
+      "name": "Arif Hossain",
+      "initials": "AH",
+      "role": "Digital Business Owner",
+      "quote": "Running Meta Ads with Ibrahim generated an immediate 4.2x ROAS for our product launch. Professional, honest, and extremely fast with revisions!"
+    }
+  ],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "What is your typical turnaround time for video editing?",
+      "answer": "For short-form content (Reels, TikToks, Shorts), standard delivery is 24 to 48 hours. Long-form YouTube edits or motion graphic commercials typically take 3 to 5 business days depending on footage length and complexity."
+    },
+    {
+      "id": 2,
+      "question": "How do revisions work if I need changes?",
+      "answer": "Your satisfaction is my priority. Every project includes revisions to make sure the cuts, pacing, graphics, color grading, and audio match your exact vision."
+    },
+    {
+      "id": 3,
+      "question": "What budget do I need to start Meta (Facebook/Instagram) Ads?",
+      "answer": "You can start testing with an ad spend as low as $10 - $20 per day. I set up proper A/B split tests to identify winning creatives before scaling your budget to maximize return on ad spend (ROAS)."
+    },
+    {
+      "id": 4,
+      "question": "Can I hire you for on-demand or monthly retainers?",
+      "answer": "Yes! I work on both single on-demand projects and monthly retainer packages for creators and businesses requiring ongoing video editing, graphic design, or ad campaign management."
+    }
+  ],
+  "inquiries": []
+}

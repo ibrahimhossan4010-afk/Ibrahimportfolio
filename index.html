@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ibrahim Hossan | Video Editor, Graphic Designer & Meta Marketer</title>
+  <meta name="description" content="Portfolio of Ibrahim Hossan - Specialist in high-impact Video Editing, Graphic Design, and ROI-driven Meta Ads Marketing.">
+  
+  <!-- Anti-flash theme script -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('ih_theme') || 'light';
+      if (saved === 'light') {
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+      }
+    })();
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23F15642'/><text x='50' y='68' font-size='55' font-family='sans-serif' font-weight='900' fill='white' text-anchor='middle'>IH</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#F15642',
+            'accent-hover': '#CD240F',
+            dark: '#0a0a0a',
+            'dark-card': '#161616',
+            'dark-border': '#262626'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#0a0a0a] text-white selection:bg-[#F15642] selection:text-white">
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div data-cms="brand-short" class="w-11 h-11 rounded-xl bg-accent flex items-center justify-center font-display font-black text-xl text-white shadow-lg shadow-accent/20 group-hover:scale-105 transition-transform">
+          IH
+        </div>
+        <div class="flex flex-col">
+          <span data-cms="profile-name" class="font-display font-bold text-lg text-white leading-tight tracking-tight">Ibrahim Hossan</span>
+          <span data-cms="profile-tagline" class="text-xs text-neutral-400 font-medium">Creative &amp; Growth</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center gap-1 bg-neutral-900/80 border border-neutral-800 rounded-full px-4 py-1.5 shadow-inner">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Header CTA & Theme Toggle -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme"></button>
+        <a href="https://wa.me/8801986494589" target="_blank" class="btn-primary text-sm py-2.5 px-5">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.82 2.791.82 3.182 0 5.768-2.587 5.768-5.766 0-3.18-2.586-5.766-5.768-5.766zm9.969 5.766c0 5.514-4.486 10-10 10-1.758 0-3.411-.458-4.858-1.258l-5.142 1.346 1.37-5.009c-.886-1.503-1.37-3.238-1.37-5.079 0-5.514 4.486-10 10-10s10 4.486 10 10z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme"></button>
+        <button id="mobile-menu-btn" aria-expanded="false" class="p-2 rounded-lg bg-neutral-900 border border-neutral-800 text-white focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav" class="hidden md:hidden border-b border-neutral-800 bg-neutral-950 px-4 pt-3 pb-6 space-y-2">
+      <a href="index.html" class="block py-2.5 px-4 rounded-lg bg-neutral-900 text-accent font-semibold">Home</a>
+      <a href="services.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">Services</a>
+      <a href="portfolio.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">Portfolio</a>
+      <a href="about.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">About</a>
+      <a href="contact.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">Contact</a>
+      <div class="pt-2">
+        <a href="https://wa.me/8801986494589" target="_blank" class="btn-primary w-full text-center">
+          WhatsApp Direct Chat
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+    <!-- Ambient Glow Backgrounds -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/15 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Hero Content (7 Cols) -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glow-pill text-xs font-semibold tracking-wide uppercase">
+            <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
+            <span data-cms="profile-availability">Available for Freelance & Long-Term Projects</span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15]">
+            <span data-cms="hero-title-1" class="text-accent-gradient">Visuals That Captivate.</span><br>
+            <span data-cms="hero-title-2" class="underline decoration-accent/60 underline-offset-8">Campaigns That Convert.</span>
+          </h1>
+
+          <!-- Subheadline -->
+          <p data-cms="hero-subtitle" class="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            I am Ibrahim Hossan—a creative specialist combining high-retention Video Editing, high-converting Graphics Design, and ROI-driven Meta Marketing to turn casual viewers into loyal paying customers.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="portfolio.html" class="btn-primary">
+              <span>View Portfolio & Works</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a data-cms="whatsapp-link" href="https://wa.me/8801986494589" target="_blank" class="btn-secondary">
+              <svg class="w-4 h-4 text-green-400 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.82 2.791.82 3.182 0 5.768-2.587 5.768-5.766 0-3.18-2.586-5.766-5.768-5.766zm9.969 5.766c0 5.514-4.486 10-10 10-1.758 0-3.411-.458-4.858-1.258l-5.142 1.346 1.37-5.009c-.886-1.503-1.37-3.238-1.37-5.079 0-5.514 4.486-10 10-10s10 4.486 10 10z"/></svg>
+              <span>Quick WhatsApp Call</span>
+            </a>
+          </div>
+
+          <!-- Quick Trust Badges -->
+          <div class="pt-6 border-t border-neutral-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-neutral-400">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Fast 24-48h Delivery</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Unlimited Revisions Support</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Data-Driven ROI Focus</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Portrait Image (5 Cols) -->
+        <div class="lg:col-span-5 flex justify-center relative">
+          <div class="relative w-72 sm:w-84 md:w-96 aspect-square">
+            <!-- Decorative Glow Rings -->
+            <div class="absolute -inset-2 bg-gradient-to-tr from-accent to-amber-500 rounded-3xl opacity-25 blur-xl"></div>
+            
+            <!-- Main Portrait Frame -->
+            <div class="relative w-full h-full rounded-2xl overflow-hidden border-2 border-neutral-700 bg-neutral-900 shadow-2xl">
+              <img data-cms="profile-photo" src="assets/images/ibrahim.jpg" alt="Ibrahim Hossan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700">
+            </div>
+
+            <!-- Floating Metric Badge 1 -->
+            <div class="absolute -bottom-5 -left-5 bg-neutral-900/90 border border-neutral-700 backdrop-blur-md px-4 py-2.5 rounded-xl shadow-xl flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              </div>
+              <div>
+                <div class="text-xs text-neutral-400 font-medium">Meta Ad Performance</div>
+                <div class="text-base font-bold text-white">4.2x Avg. ROAS</div>
+              </div>
+            </div>
+
+            <!-- Floating Metric Badge 2 -->
+            <div class="absolute -top-4 -right-4 bg-neutral-900/90 border border-neutral-700 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-xl flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+              <span class="text-xs font-semibold text-white">100+ Videos Edited</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Infinite Software & Skills Ticker (Marquee) -->
+  <section class="py-8 bg-neutral-950 border-y border-neutral-800/80">
+    <div class="max-w-7xl mx-auto px-4 mb-3">
+      <p class="text-center text-xs uppercase tracking-widest text-neutral-500 font-semibold">
+        Industry Standard Tools & Capabilities
+      </p>
+    </div>
+    <div class="marquee-wrapper py-3">
+      <div class="marquee-content font-display font-bold text-base tracking-wider text-neutral-300">
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> ADOBE PREMIERE PRO</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> AFTER EFFECTS MOTION</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> DAVINCI RESOLVE COLOR</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> META ADS MANAGER</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> ADOBE PHOTOSHOP</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> HIGH-CTR THUMBNAILS</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> CAPCUT PRO KINETICS</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> META PIXEL &amp; CONVERSIONS</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> REELS &amp; SHORTS EDITING</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> BRAND VISUAL IDENTITY</span>
+      </div>
+      <div class="marquee-content font-display font-bold text-base tracking-wider text-neutral-300" aria-hidden="true">
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> ADOBE PREMIERE PRO</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> AFTER EFFECTS MOTION</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> DAVINCI RESOLVE COLOR</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> META ADS MANAGER</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> ADOBE PHOTOSHOP</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> HIGH-CTR THUMBNAILS</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> CAPCUT PRO KINETICS</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> META PIXEL &amp; CONVERSIONS</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> REELS &amp; SHORTS EDITING</span>
+        <span class="flex items-center gap-2"><span class="text-accent">★</span> BRAND VISUAL IDENTITY</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Counters Section -->
+  <section class="py-16 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="stats-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 text-center">
+          <div class="font-display text-4xl lg:text-5xl font-extrabold text-white mb-1 counter-val" data-target="120" data-suffix="+">
+            0
+          </div>
+          <p class="text-sm text-neutral-400 font-medium">Projects Completed</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 text-center">
+          <div class="font-display text-4xl lg:text-5xl font-extrabold text-accent mb-1 counter-val" data-target="4.2" data-suffix="x">
+            0
+          </div>
+          <p class="text-sm text-neutral-400 font-medium">Average ROAS Delivered</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 text-center">
+          <div class="font-display text-4xl lg:text-5xl font-extrabold text-white mb-1 counter-val" data-target="98" data-suffix="%">
+            0
+          </div>
+          <p class="text-sm text-neutral-400 font-medium">Client Retention &amp; Trust</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-neutral-900/60 border border-neutral-800 text-center">
+          <div class="font-display text-4xl lg:text-5xl font-extrabold text-white mb-1 counter-val" data-target="24" data-suffix="h">
+            0
+          </div>
+          <p class="text-sm text-neutral-400 font-medium">Avg. Turnaround Time</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Services Section -->
+  <section class="py-20 bg-neutral-950 border-t border-neutral-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-accent font-bold">What I Do Best</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">
+            Tailored Creative &amp; Growth Solutions
+          </h2>
+        </div>
+        <p class="text-neutral-400 max-w-md text-sm">
+          Everything you need to turn raw ideas into scroll-stopping media and measurable client acquisitions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Service 1: Video Editing -->
+        <div class="p-8 rounded-2xl bg-neutral-900/80 border border-neutral-800 hover:border-accent/50 transition-all duration-300 group hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10">
+          <div class="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <span class="text-xs text-neutral-500 font-bold uppercase tracking-wider">Service 01</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">Video Editing &amp; Motion</h3>
+          <p class="text-neutral-400 text-sm mb-6 leading-relaxed">
+            High-retention storytelling for YouTube, Instagram Reels, TikTok, and Commercials. Packed with dynamic SFX, kinetic typography, and surgical pacing.
+          </p>
+          <ul class="space-y-2.5 text-xs text-neutral-300 mb-8 border-t border-neutral-800 pt-6">
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Short-Form Reels &amp; TikToks (Hook-driven)
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Long-Form YouTube Documentaries
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Motion Graphics &amp; Title Animations
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Cinematic Color Grading &amp; Audio Leveling
+            </li>
+          </ul>
+          <a href="services.html#video" class="text-xs font-semibold text-accent hover:text-white flex items-center gap-1.5 transition-colors">
+            Learn More About Video Packages →
+          </a>
+        </div>
+
+        <!-- Service 2: Graphic Design -->
+        <div class="p-8 rounded-2xl bg-neutral-900/80 border border-neutral-800 hover:border-accent/50 transition-all duration-300 group hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10">
+          <div class="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <span class="text-xs text-neutral-500 font-bold uppercase tracking-wider">Service 02</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">Graphic Design &amp; Branding</h3>
+          <p class="text-neutral-400 text-sm mb-6 leading-relaxed">
+            Eye-popping visual design tailored to stop the scroll. From click-magnet YouTube thumbnails to complete social media brand identities and promotional banners.
+          </p>
+          <ul class="space-y-2.5 text-xs text-neutral-300 mb-8 border-t border-neutral-800 pt-6">
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> High-CTR YouTube Thumbnails (10%+ avg.)
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Social Media Post &amp; Carousel Creatives
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Brand Identity, Logos &amp; Visual Guides
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Marketing Banners &amp; Mockups
+            </li>
+          </ul>
+          <a href="services.html#graphics" class="text-xs font-semibold text-accent hover:text-white flex items-center gap-1.5 transition-colors">
+            Learn More About Design Packages →
+          </a>
+        </div>
+
+        <!-- Service 3: Meta Marketing -->
+        <div class="p-8 rounded-2xl bg-neutral-900/80 border border-neutral-800 hover:border-accent/50 transition-all duration-300 group hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/10">
+          <div class="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:scale-110 transition-transform">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <span class="text-xs text-neutral-500 font-bold uppercase tracking-wider">Service 03</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">Meta Ads &amp; Marketing</h3>
+          <p class="text-neutral-400 text-sm mb-6 leading-relaxed">
+            Scalable paid advertising on Facebook and Instagram. Combining winning creative hooks with precise audience targeting to lower CAC and maximize ROAS.
+          </p>
+          <ul class="space-y-2.5 text-xs text-neutral-300 mb-8 border-t border-neutral-800 pt-6">
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Full Funnel Meta Campaign Strategy
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Pixel &amp; Conversion API (CAPI) Integration
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Creative A/B Testing &amp; Ad Copywriting
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-accent font-bold">✓</span> Budget Optimization &amp; Scaling (CBO/ABO)
+            </li>
+          </ul>
+          <a href="services.html#marketing" class="text-xs font-semibold text-accent hover:text-white flex items-center gap-1.5 transition-colors">
+            Learn More About Meta Ads →
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Featured Portfolio Showcase Section -->
+  <section class="py-20 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-widest text-accent font-bold">Selected Works</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">
+          Featured Portfolio Projects
+        </h2>
+        <p class="text-neutral-400 text-sm mt-3">
+          Explore recent video edits, graphic designs, and ad marketing case studies. Click any project to inspect details or preview video.
+        </p>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 pt-8">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="video">Video Editing</button>
+          <button class="filter-btn" data-filter="graphics">Graphic Design</button>
+          <button class="filter-btn" data-filter="meta">Meta Marketing</button>
+        </div>
+      </div>
+
+      <!-- Portfolio Dynamic Grid -->
+      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered by main.js -->
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="portfolio.html" class="btn-secondary">
+          <span>View All 20+ Case Studies</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Working Process Section -->
+  <section class="py-20 bg-neutral-950 border-t border-neutral-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest text-accent font-bold">How I Work</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">
+          Streamlined 4-Step Process
+        </h2>
+        <p class="text-neutral-400 text-sm mt-3">
+          Zero confusion, full transparency, and fast communication from day one to launch.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="relative p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+          <div class="w-12 h-12 rounded-xl bg-accent text-white font-display font-black text-xl flex items-center justify-center mb-5 shadow-lg shadow-accent/20">
+            01
+          </div>
+          <h4 class="font-display text-lg font-bold text-white mb-2">Discovery &amp; Brief</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            We align on your brand identity, target audience, hook angles, and key performance benchmarks.
+          </p>
+        </div>
+
+        <div class="relative p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+          <div class="w-12 h-12 rounded-xl bg-neutral-800 text-neutral-300 font-display font-black text-xl flex items-center justify-center mb-5 border border-neutral-700">
+            02
+          </div>
+          <h4 class="font-display text-lg font-bold text-white mb-2">Production &amp; Edit</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Crafting visuals, pacing video frames, engineering sound effects, or assembling high-converting ad copies.
+          </p>
+        </div>
+
+        <div class="relative p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+          <div class="w-12 h-12 rounded-xl bg-neutral-800 text-neutral-300 font-display font-black text-xl flex items-center justify-center mb-5 border border-neutral-700">
+            03
+          </div>
+          <h4 class="font-display text-lg font-bold text-white mb-2">Review &amp; Refine</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            You review the draft. We implement quick adjustments to ensure every detail matches your vision.
+          </p>
+        </div>
+
+        <div class="relative p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+          <div class="w-12 h-12 rounded-xl bg-neutral-800 text-neutral-300 font-display font-black text-xl flex items-center justify-center mb-5 border border-neutral-700">
+            04
+          </div>
+          <h4 class="font-display text-lg font-bold text-white mb-2">Delivery &amp; Scale</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Final 4K export delivered or ad campaign launched, with ongoing performance tracking and support.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest text-accent font-bold">Client Feedback</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">
+          What Clients Say
+        </h2>
+      </div>
+
+      <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="p-8 rounded-2xl bg-neutral-900/80 border border-neutral-800 relative">
+          <div class="flex text-amber-400 mb-4 text-sm">★★★★★</div>
+          <p class="text-sm text-neutral-300 leading-relaxed italic mb-6">
+            "Ibrahim took our raw footage and turned it into high-octane Instagram Reels that doubled our organic reach within 3 weeks. His pacing and sound effects are top tier!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center font-bold text-accent">
+              TM
+            </div>
+            <div>
+              <h5 class="text-sm font-bold text-white">Tariq Mahmud</h5>
+              <p class="text-xs text-neutral-500">Content Creator &amp; Founder</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-neutral-900/80 border border-neutral-800 relative">
+          <div class="flex text-amber-400 mb-4 text-sm">★★★★★</div>
+          <p class="text-sm text-neutral-300 leading-relaxed italic mb-6">
+            "The YouTube thumbnails and ad graphics Ibrahim designed increased our click-through rate dramatically. He understands viewer psychology better than most designers."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center font-bold text-accent">
+              NR
+            </div>
+            <div>
+              <h5 class="text-sm font-bold text-white">Nadia Rahman</h5>
+              <p class="text-xs text-neutral-500">E-Commerce Brand Manager</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-2xl bg-neutral-900/80 border border-neutral-800 relative">
+          <div class="flex text-amber-400 mb-4 text-sm">★★★★★</div>
+          <p class="text-sm text-neutral-300 leading-relaxed italic mb-6">
+            "Running Meta Ads with Ibrahim generated an immediate 4.2x ROAS for our product launch. Professional, honest, and extremely fast with revisions!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center font-bold text-accent">
+              AH
+            </div>
+            <div>
+              <h5 class="text-sm font-bold text-white">Arif Hossain</h5>
+              <p class="text-xs text-neutral-500">Digital Business Owner</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 bg-neutral-950 border-t border-neutral-800/80">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <span class="text-xs uppercase tracking-widest text-accent font-bold">Got Questions?</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <div id="faq-list" class="space-y-4">
+        
+        <div class="faq-item active">
+          <button class="faq-trigger">
+            <span>What is your typical turnaround time for video editing?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            For short-form content (Reels, TikToks, Shorts), standard delivery is 24 to 48 hours. Long-form YouTube edits or motion graphic commercials typically take 3 to 5 business days depending on footage length and complexity.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span>How do revisions work if I need changes?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            Your satisfaction is my priority. Every project includes revisions to make sure the cuts, pacing, graphics, color grading, and audio match your exact vision.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span>What budget do I need to start Meta (Facebook/Instagram) Ads?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            You can start testing with an ad spend as low as $10 - $20 per day. I set up proper A/B split tests to identify winning creatives before scaling your budget to maximize return on ad spend (ROAS).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span>Can I hire you for on-demand or monthly retainers?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            Yes! I work on both single on-demand projects and monthly retainer packages for creators and businesses requiring ongoing video editing, graphic design, or ad campaign management.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Direct Consultation & Call to Action Banner -->
+  <section class="py-20 bg-gradient-to-b from-[#0a0a0a] to-neutral-950">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative rounded-3xl bg-neutral-900 border border-neutral-800 p-8 sm:p-14 overflow-hidden text-center">
+        
+        <!-- Glow Circle -->
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <span class="text-xs uppercase tracking-widest text-accent font-bold">Let's Connect &amp; Collaborate</span>
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mt-3 mb-5 max-w-2xl mx-auto">
+          Ready to Elevate Your Content &amp; Grow Your Brand?
+        </h2>
+        <p class="text-neutral-400 max-w-xl mx-auto text-sm sm:text-base mb-8">
+          Reach out directly via WhatsApp or email. I am always open to discussing new projects, creative concepts, or marketing campaigns.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a data-cms="whatsapp-link" href="https://wa.me/8801986494589" target="_blank" class="btn-primary text-base px-8 py-3.5">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.82 2.791.82 3.182 0 5.768-2.587 5.768-5.766 0-3.18-2.586-5.766-5.768-5.766zm9.969 5.766c0 5.514-4.486 10-10 10-1.758 0-3.411-.458-4.858-1.258l-5.142 1.346 1.37-5.009c-.886-1.503-1.37-3.238-1.37-5.079 0-5.514 4.486-10 10-10s10 4.486 10 10z"/></svg>
+            <span>Message on WhatsApp</span>
+          </a>
+          <a data-cms="email-link" href="mailto:ibrahimhossan.connect@gmail.com" class="btn-secondary text-base px-8 py-3.5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Send Email</span>
+          </a>
+        </div>
+
+        <div class="mt-8 text-xs text-neutral-500">
+          Phone: <strong data-cms="contact-phone" class="text-neutral-300">01986494589</strong> &bull; Email: <strong data-cms="contact-email" class="text-neutral-300">ibrahimhossan.connect@gmail.com</strong>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="bg-neutral-950 border-t border-neutral-900 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <div class="flex items-center gap-3">
+          <div data-cms="brand-short" class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center font-display font-black text-sm text-white">
+            IH
+          </div>
+          <div>
+            <span data-cms="profile-name" class="font-display font-bold text-white text-base">Ibrahim Hossan</span>
+            <p class="text-xs text-neutral-500">Creative Video Editor, Graphic Designer &amp; Meta Marketer</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-6 text-xs text-neutral-400">
+          <a href="index.html" class="hover:text-white transition-colors">Home</a>
+          <a href="services.html" class="hover:text-white transition-colors">Services</a>
+          <a href="portfolio.html" class="hover:text-white transition-colors">Portfolio</a>
+          <a href="about.html" class="hover:text-white transition-colors">About</a>
+          <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+          <a href="admin.html" class="hover:text-accent transition-colors font-semibold">Admin</a>
+        </div>
+
+        <div class="text-xs text-neutral-500">
+          &copy; 2026 <span data-cms="profile-name">Ibrahim Hossan</span>. All rights reserved.
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Project Modal -->
+  <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">
+        ✕
+      </button>
+      <div id="modal-media-container"></div>
+      <div class="p-6 md:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <span id="modal-metrics" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-accent"></span>
+          <div id="modal-tools" class="flex flex-wrap gap-1.5"></div>
+        </div>
+        <h3 id="modal-title" class="font-display text-2xl font-bold text-white mb-3"></h3>
+        <p id="modal-desc" class="text-sm text-neutral-400 leading-relaxed mb-6"></p>
+        <div class="flex items-center justify-end">
+          <a id="modal-cta" href="#" target="_blank" class="btn-primary text-xs py-2 px-5">
+            Discuss Similar Project
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Quick Button -->
+  <a href="https://wa.me/8801986494589" target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.82 2.791.82 3.182 0 5.768-2.587 5.768-5.766 0-3.18-2.586-5.766-5.768-5.766zm9.969 5.766c0 5.514-4.486 10-10 10-1.758 0-3.411-.458-4.858-1.258l-5.142 1.346 1.37-5.009c-.886-1.503-1.37-3.238-1.37-5.079 0-5.514 4.486-10 10-10s10 4.486 10 10z"/>
+    </svg>
+  </a>
+
+  <!-- JavaScript Script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Studio | Ibrahim Hossan Portfolio</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Anti-flash theme script -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('ih_theme') || 'light';
+      if (saved === 'light') {
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23F15642'/><text x='50' y='68' font-size='55' font-family='sans-serif' font-weight='900' fill='white' text-anchor='middle'>IH</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#F15642',
+            'accent-hover': '#CD240F',
+            dark: '#0a0a0a',
+            'dark-card': '#161616',
+            'dark-border': '#262626'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Admin Specific Polish */
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+    .admin-nav-item:hover {
+      background: rgba(241, 86, 66, 0.08);
+      color: var(--text-primary);
+    }
+    .admin-nav-item.active {
+      background: var(--accent);
+      color: #ffffff !important;
+      box-shadow: 0 4px 16px var(--accent-glow);
+      font-weight: 600;
+    }
+    html.light .admin-nav-item {
+      color: #475569;
+    }
+    html.light .admin-nav-item:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    html.light .admin-nav-item.active {
+      background: var(--accent) !important;
+      color: #ffffff !important;
+    }
+
+    .admin-sidebar {
+      background-color: #101010;
+      border-right: 1px solid #262626;
+    }
+    html.light .admin-sidebar {
+      background-color: #f8fafc !important;
+      border-right: 1px solid #e2e8f0 !important;
+    }
+
+    .admin-topbar {
+      background-color: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #262626;
+    }
+    html.light .admin-topbar {
+      background-color: rgba(255, 255, 255, 0.92) !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }
+
+    .admin-card {
+      background-color: #141414;
+      border: 1px solid #262626;
+      border-radius: 1.25rem;
+    }
+    html.light .admin-card {
+      background-color: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .toast-item {
+      animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] text-white min-h-screen selection:bg-[#F15642] selection:text-white">
+
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="fixed top-5 right-5 z-[200] space-y-3 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+  <!-- =======================================================================
+       LOGIN VIEW
+       ======================================================================= -->
+  <div id="admin-login-view" class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <!-- Subtle Accent Ambient Glow -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-accent/15 blur-[130px] rounded-full pointer-events-none"></div>
+
+    <!-- Top Corner Theme Toggle -->
+    <div class="fixed top-5 right-5 z-20 flex items-center gap-3">
+      <a href="index.html" class="btn-secondary text-xs py-2 px-4">← Back to Website</a>
+      <button class="theme-toggle-btn" aria-label="Toggle Theme"></button>
+    </div>
+
+    <div class="admin-card w-full max-w-md p-8 sm:p-10 relative z-10 shadow-2xl">
+      <div class="text-center mb-8">
+        <div class="relative w-20 h-20 mx-auto mb-4">
+          <img src="assets/images/ibrahim.jpg" alt="Ibrahim Hossan" class="w-full h-full object-cover object-top rounded-2xl border-2 border-accent shadow-lg shadow-accent/20">
+          <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg bg-accent text-white font-display font-black text-[10px] flex items-center justify-center shadow">IH</span>
+        </div>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glow-pill text-[11px] font-bold uppercase tracking-wider mb-3">
+          Studio Control Panel
+        </span>
+        <h1 class="font-display text-2xl font-extrabold text-white">Ibrahim Hossan Admin</h1>
+        <p class="text-xs text-neutral-400 mt-1">Sign in to manage projects, videos, profile &amp; inquiries</p>
+      </div>
+
+      <div id="login-error" class="hidden mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-medium text-center"></div>
+      <div id="server-warning" class="hidden mb-4 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs leading-relaxed">
+        <strong>Note:</strong> Local Node server (<code>server.js</code>) is not detected. Ensure you open this via <code>http://localhost:3000/admin.html</code> for live disk persistence.
+      </div>
+
+      <form id="admin-login-form" class="space-y-5">
+        <div>
+          <label for="admin-password" class="block text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2">Admin Password</label>
+          <div class="relative">
+            <input type="password" id="admin-password" required autocomplete="current-password" placeholder="Enter your studio password" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-3 pr-11 text-sm text-white focus:outline-none transition-colors">
+            <button type="button" id="toggle-password-visibility" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-accent p-1" aria-label="Show password">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn" class="btn-primary w-full py-3.5 text-sm font-bold">
+          <span>Unlock Studio Dashboard</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       ADMIN DASHBOARD SHELL
+       ======================================================================= -->
+  <div id="admin-app-view" class="hidden min-h-screen flex">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- Left Sidebar Navigation -->
+    <aside id="admin-sidebar" class="admin-sidebar fixed lg:sticky top-0 left-0 z-50 h-screen w-68 flex-shrink-0 flex flex-col justify-between p-5 transition-transform duration-300 -translate-x-full lg:translate-x-0" style="width: 270px;">
+      
+      <div class="space-y-6 overflow-y-auto pr-1">
+        <!-- Brand Logo -->
+        <div class="flex items-center justify-between">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-accent flex items-center justify-center font-display font-black text-lg text-white shadow-lg shadow-accent/25">
+              IH
+            </div>
+            <div>
+              <div class="font-display font-bold text-base text-white leading-tight">Ibrahim Hossan</div>
+              <div class="text-[11px] text-accent font-semibold uppercase tracking-wider">Studio Admin</div>
+            </div>
+          </a>
+          <button id="close-sidebar-btn" class="lg:hidden p-1.5 rounded-lg text-neutral-400 hover:text-white">✕</button>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="space-y-1.5">
+          <button class="admin-nav-item active" data-tab="overview">
+            <span class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+              <span>Overview</span>
+            </span>
+          </button>
+
+          <button class="admin-nav-item" data-tab="portfolio">
+            <span class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              <span>Portfolio &amp; Videos</span>
+            </span>
+            <span id="nav-portfolio-count" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-black/20">0</span>
+          </button>
+
+          <button class="admin-nav-item" data-tab="profile">
+            <span class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Profile &amp; Hero Text</span>
+            </span>
+          </button>
+
+          <button class="admin-nav-item" data-tab="content">
+            <span class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <span>Stats, Reviews &amp; FAQs</span>
+            </span>
+          </button>
+
+          <button class="admin-nav-item" data-tab="inquiries">
+            <span class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>Client Inquiries</span>
+            </span>
+            <span id="nav-inquiries-count" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-accent/20 text-accent">0</span>
+          </button>
+
+          <button class="admin-nav-item" data-tab="settings">
+            <span class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>Security &amp; Backup</span>
+            </span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Sidebar Bottom Profile & Actions -->
+      <div class="pt-4 border-t border-neutral-800 space-y-3">
+        <div class="flex items-center gap-3 p-2.5 rounded-xl bg-neutral-900/60 border border-neutral-800">
+          <img id="sidebar-avatar" src="assets/images/ibrahim.jpg" alt="Ibrahim Hossan" class="w-10 h-10 rounded-full object-cover object-top border border-accent/50">
+          <div class="overflow-hidden">
+            <div id="sidebar-name" class="text-xs font-bold text-white truncate">Ibrahim Hossan</div>
+            <div class="flex items-center gap-1.5 text-[11px] text-green-500 font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+              <span>Admin Active</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="index.html" target="_blank" class="btn-secondary text-[11px] py-2 px-2 rounded-xl text-center">
+            Live Site ↗
+          </a>
+          <button id="admin-logout-btn" class="btn-secondary text-[11px] py-2 px-2 rounded-xl text-center hover:!border-red-500 hover:!text-red-500">
+            Logout
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- Sticky Topbar -->
+      <header class="admin-topbar sticky top-0 z-30 h-20 px-4 sm:px-8 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <button id="open-sidebar-btn" class="lg:hidden p-2 rounded-xl bg-neutral-900 border border-neutral-800 text-white">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div>
+            <h2 id="top-section-title" class="font-display text-lg sm:text-xl font-bold text-white leading-tight">Dashboard Overview</h2>
+            <p id="top-section-subtitle" class="text-xs text-neutral-400 hidden sm:block">Monitor your portfolio metrics, videos, and client leads</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-500 text-xs font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+            Live Sync Ready
+          </span>
+          <button id="topbar-add-project-btn" class="btn-primary text-xs py-2.5 px-4">
+            <span>+ Add Project</span>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle Theme"></button>
+        </div>
+      </header>
+
+      <!-- Workspace Body -->
+      <main class="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto space-y-8">
+
+        <!-- =================================================================
+             TAB 1: OVERVIEW
+             ================================================================= -->
+        <section id="tab-overview" class="admin-tab space-y-8">
+          
+          <!-- Welcome Hero Banner -->
+          <div class="admin-card p-6 sm:p-8 relative overflow-hidden">
+            <div class="absolute -right-12 -top-12 w-64 h-64 bg-accent/15 blur-3xl rounded-full pointer-events-none"></div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+              <div class="flex items-center gap-5">
+                <img id="overview-avatar" src="assets/images/ibrahim.jpg" alt="Ibrahim Hossan" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover object-top border-2 border-accent shadow-lg">
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-widest text-accent">Creative &amp; Growth Studio</span>
+                  <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white mt-0.5">
+                    Welcome back, <span id="overview-name">Ibrahim Hossan</span>
+                  </h3>
+                  <p class="text-xs sm:text-sm text-neutral-400 mt-1 max-w-xl">
+                    Everything you update here automatically updates your live portfolio pages in real time.
+                  </p>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-3">
+                <button onclick="switchTab('portfolio'); openProjectModal();" class="btn-primary text-xs py-2.5 px-5">
+                  + Upload New Video
+                </button>
+                <a href="index.html" target="_blank" class="btn-secondary text-xs py-2.5 px-5">
+                  Preview Live Site ↗
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Cards -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="admin-card p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold text-neutral-400 uppercase">Total Works</span>
+                <span class="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">★</span>
+              </div>
+              <div id="kpi-total-projects" class="font-display text-3xl font-extrabold text-white">0</div>
+              <div class="text-[11px] text-neutral-500 mt-1">Published on Portfolio</div>
+            </div>
+
+            <div class="admin-card p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold text-neutral-400 uppercase">Video Edits</span>
+                <span class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold">▶</span>
+              </div>
+              <div id="kpi-video-count" class="font-display text-3xl font-extrabold text-white">0</div>
+              <div class="text-[11px] text-neutral-500 mt-1">Reels, Shorts &amp; YouTube</div>
+            </div>
+
+            <div class="admin-card p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold text-neutral-400 uppercase">Graphics &amp; Meta</span>
+                <span class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">◆</span>
+              </div>
+              <div id="kpi-other-count" class="font-display text-3xl font-extrabold text-white">0</div>
+              <div class="text-[11px] text-neutral-500 mt-1">Thumbnails &amp; Ad Funnels</div>
+            </div>
+
+            <div class="admin-card p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-semibold text-neutral-400 uppercase">Client Leads</span>
+                <span class="w-9 h-9 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center font-bold">✉</span>
+              </div>
+              <div id="kpi-inquiries-count" class="font-display text-3xl font-extrabold text-accent">0</div>
+              <div class="text-[11px] text-neutral-500 mt-1">Contact Form Inquiries</div>
+            </div>
+          </div>
+
+          <!-- Analytics & Quick Shortcuts -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Category Distribution -->
+            <div class="admin-card p-6 lg:col-span-7 space-y-5">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-display text-base font-bold text-white">Portfolio Mix Breakdown</h4>
+                  <p class="text-xs text-neutral-400">Distribution across your 3 core creative pillars</p>
+                </div>
+                <button onclick="switchTab('portfolio')" class="text-xs font-semibold text-accent hover:underline">Manage All →</button>
+              </div>
+              <div id="category-breakdown-bars" class="space-y-4 pt-2">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Quick Shortcuts -->
+            <div class="admin-card p-6 lg:col-span-5 space-y-4">
+              <h4 class="font-display text-base font-bold text-white">Studio Quick Actions</h4>
+              <div class="grid grid-cols-1 gap-2.5">
+                <button onclick="switchTab('portfolio'); openProjectModal();" class="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-accent text-left flex items-center justify-between transition-all">
+                  <div>
+                    <div class="text-xs font-bold text-white">Add Video / Graphic Project</div>
+                    <div class="text-[11px] text-neutral-400">Attach YouTube, Drive, or MP4 showcase</div>
+                  </div>
+                  <span class="text-accent font-bold">+</span>
+                </button>
+                <button onclick="switchTab('profile')" class="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-accent text-left flex items-center justify-between transition-all">
+                  <div>
+                    <div class="text-xs font-bold text-white">Update Portrait &amp; Hero Text</div>
+                    <div class="text-[11px] text-neutral-400">Change bio, headline, or availability status</div>
+                  </div>
+                  <span class="text-accent font-bold">→</span>
+                </button>
+                <button onclick="switchTab('content')" class="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-accent text-left flex items-center justify-between transition-all">
+                  <div>
+                    <div class="text-xs font-bold text-white">Edit Stats, Client Reviews &amp; FAQs</div>
+                    <div class="text-[11px] text-neutral-400">Keep ROAS metrics and reviews fresh</div>
+                  </div>
+                  <span class="text-accent font-bold">→</span>
+                </button>
+                <button onclick="exportSiteDataBackup()" class="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-accent text-left flex items-center justify-between transition-all">
+                  <div>
+                    <div class="text-xs font-bold text-white">Download Full JSON Backup</div>
+                    <div class="text-[11px] text-neutral-400">Export <code>site_data.json</code> safely</div>
+                  </div>
+                  <span class="text-accent font-bold">↓</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Recent Projects & Inquiries -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="admin-card p-6 space-y-4">
+              <div class="flex items-center justify-between">
+                <h4 class="font-display text-base font-bold text-white">Recent Projects</h4>
+                <button onclick="switchTab('portfolio')" class="text-xs font-semibold text-accent hover:underline">View All</button>
+              </div>
+              <div id="overview-recent-projects" class="space-y-3"></div>
+            </div>
+
+            <div class="admin-card p-6 space-y-4">
+              <div class="flex items-center justify-between">
+                <h4 class="font-display text-base font-bold text-white">Recent Client Inquiries</h4>
+                <button onclick="switchTab('inquiries')" class="text-xs font-semibold text-accent hover:underline">View All</button>
+              </div>
+              <div id="overview-recent-inquiries" class="space-y-3"></div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- =================================================================
+             TAB 2: PORTFOLIO & VIDEOS MANAGER
+             ================================================================= -->
+        <section id="tab-portfolio" class="admin-tab hidden space-y-6">
+          <div class="admin-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-2">
+              <button class="admin-filter-btn filter-btn active" data-cat="all">All</button>
+              <button class="admin-filter-btn filter-btn" data-cat="video">Video Editing</button>
+              <button class="admin-filter-btn filter-btn" data-cat="graphics">Graphic Design</button>
+              <button class="admin-filter-btn filter-btn" data-cat="meta">Meta Marketing</button>
+            </div>
+            <div class="flex items-center gap-3">
+              <input type="text" id="portfolio-search" placeholder="Search projects..." class="bg-neutral-950 border border-neutral-800 focus:border-accent rounded-full px-4 py-2 text-xs text-white focus:outline-none w-full sm:w-52">
+              <button onclick="openProjectModal()" class="btn-primary text-xs py-2 px-4 whitespace-nowrap">+ Add Project</button>
+            </div>
+          </div>
+
+          <div id="admin-portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Populated dynamically -->
+          </div>
+        </section>
+
+        <!-- =================================================================
+             TAB 3: PROFILE & HERO BIO EDITOR
+             ================================================================= -->
+        <section id="tab-profile" class="admin-tab hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <form id="profile-editor-form" class="admin-card p-6 sm:p-8 lg:col-span-8 space-y-6">
+              <div class="flex items-center justify-between border-b border-neutral-800 pb-4">
+                <div>
+                  <h3 class="font-display text-xl font-bold text-white">Profile, Hero &amp; Contact Settings</h3>
+                  <p class="text-xs text-neutral-400">Changes save directly to your live site across all pages</p>
+                </div>
+                <button type="submit" class="btn-primary text-xs py-2.5 px-5">Save Changes</button>
+              </div>
+
+              <!-- Photo Upload Row -->
+              <div class="flex flex-col sm:flex-row items-center gap-5 p-4 rounded-2xl bg-neutral-900/60 border border-neutral-800">
+                <img id="profile-photo-preview" src="assets/images/ibrahim.jpg" alt="Profile Preview" class="w-20 h-20 rounded-2xl object-cover object-top border-2 border-accent">
+                <div class="flex-1 text-center sm:text-left space-y-2">
+                  <div class="text-sm font-bold text-white">Profile Portrait Photo</div>
+                  <p class="text-xs text-neutral-400">Upload a crisp JPG, PNG, or WebP portrait (max 5MB)</p>
+                  <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <label class="btn-secondary text-xs py-1.5 px-3 cursor-pointer">
+                      <span>Upload New Photo</span>
+                      <input type="file" id="profile-photo-input" accept="image/*" class="hidden">
+                    </label>
+                    <input type="text" id="edit-photo-url" placeholder="assets/images/ibrahim.jpg" class="bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-1.5 text-xs text-white w-56 focus:outline-none focus:border-accent">
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Full Name</label>
+                  <input type="text" id="edit-name" required class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Short Monogram (Logo)</label>
+                  <input type="text" id="edit-brand-short" maxlength="4" required class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Header Tagline</label>
+                  <input type="text" id="edit-tagline" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Availability Status Pill</label>
+                  <input type="text" id="edit-availability" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Hero Headline Line 1 (Coral Gradient)</label>
+                  <input type="text" id="edit-hero-1" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Hero Headline Line 2</label>
+                  <input type="text" id="edit-hero-2" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Hero Subheadline Intro</label>
+                <textarea id="edit-hero-subtitle" rows="3" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">About Page Lead Statement</label>
+                <textarea id="edit-about-short" rows="2" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">About Page Full Story</label>
+                <textarea id="edit-about-story" rows="3" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none"></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2 border-t border-neutral-800">
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Display Phone</label>
+                  <input type="text" id="edit-phone" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">WhatsApp Number (with Country Code)</label>
+                  <input type="text" id="edit-whatsapp" placeholder="8801986494589" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1.5">Email Address</label>
+                  <input type="email" id="edit-email" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button type="submit" class="btn-primary text-sm py-3 px-8">Save Profile Changes</button>
+              </div>
+            </form>
+
+            <!-- Live Mini Preview Card -->
+            <div class="admin-card p-6 lg:col-span-4 sticky top-28 space-y-4">
+              <div class="text-xs font-bold uppercase tracking-widest text-accent">Live Hero Preview</div>
+              <div class="p-5 rounded-2xl bg-neutral-900/60 border border-neutral-800 space-y-4 text-center">
+                <img id="live-preview-img" src="assets/images/ibrahim.jpg" alt="Preview" class="w-24 h-24 rounded-2xl mx-auto object-cover object-top border-2 border-accent">
+                <div class="inline-block px-2.5 py-0.5 rounded-full glow-pill text-[10px] font-semibold" id="live-preview-avail">Available</div>
+                <h4 class="font-display text-lg font-extrabold leading-snug">
+                  <span id="live-preview-h1" class="text-accent"></span><br>
+                  <span id="live-preview-h2" class="text-white"></span>
+                </h4>
+                <p id="live-preview-sub" class="text-xs text-neutral-400 line-clamp-3"></p>
+                <div class="pt-3 border-t border-neutral-800 text-[11px] text-neutral-400">
+                  <div id="live-preview-contact">01986494589</div>
+                  <div id="live-preview-email" class="truncate">ibrahimhossan.connect@gmail.com</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- =================================================================
+             TAB 4: STATS, REVIEWS & FAQS
+             ================================================================= -->
+        <section id="tab-content" class="admin-tab hidden space-y-8">
+          
+          <!-- Stats Counters Editor -->
+          <div class="admin-card p-6 sm:p-8 space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-800 pb-4">
+              <div>
+                <h3 class="font-display text-lg font-bold text-white">Homepage Metrics Counters</h3>
+                <p class="text-xs text-neutral-400">Edit the 4 big animated numbers shown below your Hero</p>
+              </div>
+              <button id="save-stats-btn" class="btn-primary text-xs py-2 px-5">Save Stats</button>
+            </div>
+            <div id="stats-editor-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+          </div>
+
+          <!-- Testimonials Manager -->
+          <div class="admin-card p-6 sm:p-8 space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-800 pb-4">
+              <div>
+                <h3 class="font-display text-lg font-bold text-white">Client Testimonials</h3>
+                <p class="text-xs text-neutral-400">Manage client quotes displayed on your homepage</p>
+              </div>
+              <button onclick="openTestimonialModal()" class="btn-primary text-xs py-2 px-5">+ Add Review</button>
+            </div>
+            <div id="testimonials-editor-list" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+          </div>
+
+          <!-- FAQs Manager -->
+          <div class="admin-card p-6 sm:p-8 space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-800 pb-4">
+              <div>
+                <h3 class="font-display text-lg font-bold text-white">Frequently Asked Questions</h3>
+                <p class="text-xs text-neutral-400">Answer client questions clearly before they message you</p>
+              </div>
+              <button onclick="openFaqModal()" class="btn-primary text-xs py-2 px-5">+ Add FAQ</button>
+            </div>
+            <div id="faqs-editor-list" class="space-y-3"></div>
+          </div>
+
+        </section>
+
+        <!-- =================================================================
+             TAB 5: CLIENT INQUIRIES
+             ================================================================= -->
+        <section id="tab-inquiries" class="admin-tab hidden space-y-6">
+          <div class="admin-card p-5 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex flex-wrap gap-2">
+              <button class="inquiry-filter-btn filter-btn active" data-status="all">All Leads</button>
+              <button class="inquiry-filter-btn filter-btn" data-status="New">New</button>
+              <button class="inquiry-filter-btn filter-btn" data-status="Contacted">Contacted</button>
+              <button class="inquiry-filter-btn filter-btn" data-status="Completed">Completed</button>
+            </div>
+            <span class="text-xs text-neutral-400">Messages submitted via <code>contact.html</code> appear here automatically.</span>
+          </div>
+
+          <div id="inquiries-list" class="space-y-4">
+            <!-- Populated dynamically -->
+          </div>
+        </section>
+
+        <!-- =================================================================
+             TAB 6: SECURITY & BACKUP
+             ================================================================= -->
+        <section id="tab-settings" class="admin-tab hidden space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Theme Selector -->
+            <div class="admin-card p-6 sm:p-8 space-y-5">
+              <div>
+                <h3 class="font-display text-lg font-bold text-white">Studio &amp; Website Theme</h3>
+                <p class="text-xs text-neutral-400">Switch between crisp Light Mode and sleek Dark Mode</p>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <button type="button" onclick="applyTheme('light')" class="p-4 rounded-2xl border-2 border-neutral-800 hover:border-accent bg-white text-slate-900 text-left space-y-2 transition-all">
+                  <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold">☀</div>
+                  <div class="text-sm font-bold text-slate-900">Light Mode</div>
+                  <div class="text-[11px] text-slate-500">Crisp white clean canvas</div>
+                </button>
+                <button type="button" onclick="applyTheme('dark')" class="p-4 rounded-2xl border-2 border-neutral-800 hover:border-accent bg-[#0a0a0a] text-white text-left space-y-2 transition-all">
+                  <div class="w-8 h-8 rounded-full bg-neutral-800 text-amber-400 flex items-center justify-center font-bold">🌙</div>
+                  <div class="text-sm font-bold text-white">Dark Mode</div>
+                  <div class="text-[11px] text-neutral-400">Sleek obsidian studio look</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Password Change -->
+            <div class="admin-card p-6 sm:p-8 space-y-5">
+              <div>
+                <h3 class="font-display text-lg font-bold text-white">Change Admin Password</h3>
+                <p class="text-xs text-neutral-400">Stored securely hashed on your local Node server</p>
+              </div>
+              <form id="change-password-form" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Current Password</label>
+                  <input type="password" id="curr-pass" required class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">New Password</label>
+                    <input type="password" id="new-pass" minlength="6" required class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Confirm New Password</label>
+                    <input type="password" id="confirm-pass" minlength="6" required class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                  </div>
+                </div>
+                <button type="submit" class="btn-primary text-xs py-2.5 px-6">Update Password</button>
+              </form>
+            </div>
+
+          </div>
+
+          <!-- Backup Card -->
+          <div class="admin-card p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="font-display text-lg font-bold text-white">Export Data Backup</h3>
+              <p class="text-xs text-neutral-400">Download a complete JSON copy of your portfolio, profile, reviews, and leads.</p>
+            </div>
+            <button onclick="exportSiteDataBackup()" class="btn-secondary text-xs py-2.5 px-5">
+              ↓ Download site_data.json
+            </button>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       ADD / EDIT PROJECT MODAL
+       ======================================================================= -->
+  <div id="project-editor-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content max-w-2xl max-h-[90vh] overflow-y-auto">
+      <button type="button" onclick="closeProjectModal()" class="modal-close-btn">✕</button>
+      <div class="p-6 sm:p-8 space-y-5">
+        <div>
+          <span class="text-xs font-bold uppercase text-accent">Portfolio Manager</span>
+          <h3 id="project-modal-heading" class="font-display text-2xl font-bold text-white mt-1">Add New Project</h3>
+        </div>
+
+        <form id="project-editor-form" class="space-y-4">
+          <input type="hidden" id="proj-id">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Project Title *</label>
+              <input type="text" id="proj-title" required placeholder="e.g. Viral Tech Reel Edit" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Category *</label>
+              <select id="proj-category" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                <option value="video">Video Editing</option>
+                <option value="graphics">Graphics Design</option>
+                <option value="meta">Meta Marketing</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Key Metrics / Result Badge</label>
+              <input type="text" id="proj-metrics" placeholder="e.g. 500K+ Views | 4.5x ROAS" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Tools Used (comma separated)</label>
+              <input type="text" id="proj-tools" placeholder="Premiere Pro, After Effects" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Video Link (YouTube, Shorts, Vimeo, Drive, or MP4 — leave blank if image only)</label>
+            <input type="text" id="proj-video-url" placeholder="https://www.youtube.com/watch?v=..." class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+          </div>
+
+          <div class="p-4 rounded-xl bg-neutral-900/60 border border-neutral-800 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <label class="text-xs font-semibold text-neutral-400 uppercase">Thumbnail / Image Preview</label>
+              <label class="btn-secondary text-[11px] py-1 px-3 cursor-pointer">
+                <span>Upload Image File</span>
+                <input type="file" id="proj-thumb-upload" accept="image/*" class="hidden">
+              </label>
+            </div>
+            <input type="text" id="proj-thumb-url" required placeholder="assets/images/project-video-1.svg" class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+            <div class="flex flex-wrap gap-2 text-[10px]">
+              <span class="text-neutral-500 py-1">Quick Presets:</span>
+              <button type="button" onclick="setThumbPreset('assets/images/project-video-1.svg')" class="px-2 py-1 rounded bg-neutral-800 text-neutral-300 hover:text-accent">Video Reel</button>
+              <button type="button" onclick="setThumbPreset('assets/images/project-video-2.svg')" class="px-2 py-1 rounded bg-neutral-800 text-neutral-300 hover:text-accent">YouTube Doc</button>
+              <button type="button" onclick="setThumbPreset('assets/images/project-thumb-1.svg')" class="px-2 py-1 rounded bg-neutral-800 text-neutral-300 hover:text-accent">Thumbnail</button>
+              <button type="button" onclick="setThumbPreset('assets/images/project-branding-1.svg')" class="px-2 py-1 rounded bg-neutral-800 text-neutral-300 hover:text-accent">Branding</button>
+              <button type="button" onclick="setThumbPreset('assets/images/project-meta-1.svg')" class="px-2 py-1 rounded bg-neutral-800 text-neutral-300 hover:text-accent">Meta Ads</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Description *</label>
+            <textarea id="proj-desc" rows="3" required placeholder="Describe the creative strategy, editing workflow, or campaign performance..." class="w-full bg-neutral-950 border border-neutral-800 focus:border-accent rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none"></textarea>
+          </div>
+
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button type="button" onclick="closeProjectModal()" class="btn-secondary text-xs py-2.5 px-5">Cancel</button>
+            <button type="submit" class="btn-primary text-xs py-2.5 px-6">Save Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       TESTIMONIAL EDITOR MODAL
+       ======================================================================= -->
+  <div id="testimonial-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content max-w-lg">
+      <button type="button" onclick="closeTestimonialModal()" class="modal-close-btn">✕</button>
+      <div class="p-6 sm:p-8 space-y-4">
+        <h3 id="testimonial-modal-title" class="font-display text-xl font-bold text-white">Add Client Review</h3>
+        <form id="testimonial-form" class="space-y-4">
+          <input type="hidden" id="test-id">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Client Name *</label>
+              <input type="text" id="test-name" required class="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accent">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Role / Company *</label>
+              <input type="text" id="test-role" required class="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accent">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Review Quote *</label>
+            <textarea id="test-quote" rows="3" required class="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accent"></textarea>
+          </div>
+          <div class="flex justify-end gap-2">
+            <button type="button" onclick="closeTestimonialModal()" class="btn-secondary text-xs py-2 px-4">Cancel</button>
+            <button type="submit" class="btn-primary text-xs py-2 px-5">Save Review</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       FAQ EDITOR MODAL
+       ======================================================================= -->
+  <div id="faq-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-content max-w-lg">
+      <button type="button" onclick="closeFaqModal()" class="modal-close-btn">✕</button>
+      <div class="p-6 sm:p-8 space-y-4">
+        <h3 id="faq-modal-title" class="font-display text-xl font-bold text-white">Add FAQ</h3>
+        <form id="faq-form" class="space-y-4">
+          <input type="hidden" id="faq-id">
+          <div>
+            <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Question *</label>
+            <input type="text" id="faq-question" required class="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accent">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-neutral-400 uppercase mb-1">Answer *</label>
+            <textarea id="faq-answer" rows="4" required class="w-full bg-neutral-950 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-accent"></textarea>
+          </div>
+          <div class="flex justify-end gap-2">
+            <button type="button" onclick="closeFaqModal()" class="btn-secondary text-xs py-2 px-4">Cancel</button>
+            <button type="submit" class="btn-primary text-xs py-2 px-5">Save FAQ</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

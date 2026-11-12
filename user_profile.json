@@ -1,0 +1,43 @@
+{
+  "name": "Ibrahim Hossan",
+  "title": "Video Editor | Graphic Designer | Meta Marketing Specialist",
+  "bio": "I am Ibrahim Hossan, a dedicated creative professional specializing in high-impact Video Editing, Graphic Design, and ROI-focused Meta Marketing. With a passion for visual storytelling and digital growth, I help brands and creators stand out, hook their audience, and convert views into real results through eye-catching creatives and data-driven ad campaigns.",
+  "skills": {
+    "video_editing": [
+      "Adobe Premiere Pro",
+      "Adobe After Effects",
+      "DaVinci Resolve",
+      "CapCut Pro",
+      "Motion Graphics & Titles",
+      "Color Correction & Grading",
+      "Short-form Content (Reels/TikTok/Shorts)",
+      "YouTube Video Editing",
+      "Sound Design & Audio Mixing"
+    ],
+    "graphic_design": [
+      "Adobe Photoshop",
+      "Adobe Illustrator",
+      "Social Media Post & Banner Design",
+      "YouTube Thumbnail Design (High CTR)",
+      "Brand Identity & Logo Design",
+      "Ad Creatives & Visual Mockups"
+    ],
+    "meta_marketing": [
+      "Facebook & Instagram Ads Setup",
+      "Target Audience Research & Segmentation",
+      "Ad Creative Strategy & Copywriting",
+      "Meta Pixel & Conversion API Setup",
+      "Campaign Budget Optimization (CBO/ABO)",
+      "Retargeting Funnels & ROAS Scaling",
+      "A/B Split Testing & Analytics"
+    ]
+  },
+  "contact": {
+    "phone": "01986494589",
+    "whatsapp": "+8801986494589",
+    "whatsapp_link": "https://wa.me/8801986494589",
+    "email": "ibrahimhossan.connect@gmail.com"
+  },
+  "projects": [],
+  "status": "ready_for_website_link"
+}

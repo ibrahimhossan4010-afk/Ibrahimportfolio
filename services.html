@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services & Pricing | Ibrahim Hossan - Video, Design & Meta Ads</title>
+  <meta name="description" content="Explore professional video editing, graphic design, and Meta ads marketing services by Ibrahim Hossan. Transparent pricing, fast delivery, and high ROI.">
+  
+  <!-- Anti-flash theme script -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('ih_theme') || 'light';
+      if (saved === 'light') {
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23F15642'/><text x='50' y='68' font-size='55' font-family='sans-serif' font-weight='900' fill='white' text-anchor='middle'>IH</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#F15642',
+            'accent-hover': '#CD240F',
+            dark: '#0a0a0a',
+            'dark-card': '#161616',
+            'dark-border': '#262626'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#0a0a0a] text-white selection:bg-[#F15642] selection:text-white">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-xl bg-accent flex items-center justify-center font-display font-black text-xl text-white shadow-lg shadow-accent/20 group-hover:scale-105 transition-transform">
+          IH
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-lg text-white leading-tight">Ibrahim Hossan</span>
+          <span class="text-xs text-neutral-400 font-medium">Creative & Growth</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-1 bg-neutral-900/80 border border-neutral-800 rounded-full px-4 py-1.5 shadow-inner">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link active">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Header CTA & Theme Toggle -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme"></button>
+        <a href="https://wa.me/8801986494589" target="_blank" class="btn-primary text-sm py-2.5 px-5">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.82 2.791.82 3.182 0 5.768-2.587 5.768-5.766 0-3.18-2.586-5.766-5.768-5.766zm9.969 5.766c0 5.514-4.486 10-10 10-1.758 0-3.411-.458-4.858-1.258l-5.142 1.346 1.37-5.009c-.886-1.503-1.37-3.238-1.37-5.079 0-5.514 4.486-10 10-10s10 4.486 10 10z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme"></button>
+        <button id="mobile-menu-btn" aria-expanded="false" class="p-2 rounded-lg bg-neutral-900 border border-neutral-800 text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-nav" class="hidden md:hidden border-b border-neutral-800 bg-neutral-950 px-4 pt-3 pb-6 space-y-2">
+      <a href="index.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">Home</a>
+      <a href="services.html" class="block py-2.5 px-4 rounded-lg bg-neutral-900 text-accent font-semibold">Services</a>
+      <a href="portfolio.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">Portfolio</a>
+      <a href="about.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">About</a>
+      <a href="contact.html" class="block py-2.5 px-4 rounded-lg text-neutral-300 hover:bg-neutral-900">Contact</a>
+      <div class="pt-2">
+        <a href="https://wa.me/8801986494589" target="_blank" class="btn-primary w-full text-center">
+          WhatsApp Direct Chat
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24 bg-neutral-950 border-b border-neutral-800/80 relative overflow-hidden">
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-accent/10 blur-[130px] rounded-full pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <span class="text-xs uppercase tracking-widest text-accent font-bold">Services &amp; Pricing</span>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mt-3 mb-6">
+        Creative Execution &amp; <span class="text-accent-gradient">Growth Marketing</span>
+      </h1>
+      <p class="text-neutral-400 max-w-2xl mx-auto text-base sm:text-lg">
+        Whether you need high-retention short-form videos, click-generating graphics, or full-funnel Meta advertising, I deliver end-to-end excellence.
+      </p>
+    </div>
+  </section>
+
+  <!-- Service Deep Dives -->
+  <section class="py-20 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+
+      <!-- 01: Video Editing -->
+      <div id="video" class="p-8 sm:p-12 rounded-3xl bg-neutral-900/60 border border-neutral-800 scroll-mt-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase">
+              Core Service 01
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+              Video Editing &amp; Post-Production
+            </h2>
+            <p class="text-neutral-300 text-sm sm:text-base leading-relaxed">
+              In modern media, the first 3 seconds decide whether someone watches or scrolls away. I craft video content that hooks viewers immediately and sustains watch time through surgical cuts, motion graphics, and premium audio design.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-neutral-300">
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Short-Form Virality</strong>
+                Reels, Shorts &amp; TikToks with subtitles, zooms, sound effects, and B-roll transitions.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">YouTube Storytelling</strong>
+                Documentary style, talking head, podcast clips, and educational long-form edits.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Color Grading</strong>
+                DaVinci Resolve professional film-look color correction and tone matching.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Sound Design</strong>
+                Audio leveling, noise reduction, Foley sound effects, and royalty-free music mixing.
+              </div>
+            </div>
+            <div class="pt-4">
+              <a href="https://wa.me/8801986494589?text=Hi%20Ibrahim,%20I%20am%20interested%20in%20your%20Video%20Editing%20services" target="_blank" class="btn-primary text-xs py-2.5 px-6">
+                Inquire for Video Editing
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="aspect-video rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-950 relative group">
+              <img src="assets/images/project-video-1.svg" alt="Video Editing" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <span class="px-4 py-2 rounded-lg bg-neutral-900/90 text-xs font-bold text-white border border-neutral-700">
+                  4K / 60FPS Ready
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02: Graphic Design -->
+      <div id="graphics" class="p-8 sm:p-12 rounded-3xl bg-neutral-900/60 border border-neutral-800 scroll-mt-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5 order-2 lg:order-1">
+            <div class="aspect-video rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-950 relative group">
+              <img src="assets/images/project-thumb-1.svg" alt="Graphic Design" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <span class="px-4 py-2 rounded-lg bg-neutral-900/90 text-xs font-bold text-white border border-neutral-700">
+                  High-CTR Guaranteed
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-7 space-y-5 order-1 lg:order-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase">
+              Core Service 02
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+              Graphic Design &amp; Brand Visuals
+            </h2>
+            <p class="text-neutral-300 text-sm sm:text-base leading-relaxed">
+              Design is more than pretty graphics—it is visual psychology that drives action. I build brand assets and thumbnails tailored to maximize click-through rate, build recognition, and command authority.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-neutral-300">
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">YouTube Thumbnails</strong>
+                High-contrast facial emotion, bold typography, and visual curiosity hooks.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Social Media Kits</strong>
+                Instagram carousels, Facebook cover banners, LinkedIn post templates.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Brand Identity &amp; Logos</strong>
+                Modern logos, color harmony kits, and typography styleguides.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Ad Mockups &amp; Banners</strong>
+                Clean mockups and promotional graphics ready for digital distribution.
+              </div>
+            </div>
+            <div class="pt-4">
+              <a href="https://wa.me/8801986494589?text=Hi%20Ibrahim,%20I%20am%20interested%20in%20your%20Graphic%20Design%20services" target="_blank" class="btn-primary text-xs py-2.5 px-6">
+                Inquire for Graphic Design
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03: Meta Marketing -->
+      <div id="marketing" class="p-8 sm:p-12 rounded-3xl bg-neutral-900/60 border border-neutral-800 scroll-mt-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase">
+              Core Service 03
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+              Meta Ads &amp; Performance Marketing
+            </h2>
+            <p class="text-neutral-300 text-sm sm:text-base leading-relaxed">
+              Stop burning ad budget on unoptimized boosts. I build systematic Facebook &amp; Instagram advertising funnels that test hooks systematically, track customer journeys via Pixel/CAPI, and scale winning campaigns.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-neutral-300">
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Audience Research &amp; Setup</strong>
+                Target custom audiences, lookalikes, and interest stacking for low CPMs.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Pixel &amp; CAPI Setup</strong>
+                Accurate conversion tracking and event configuration to bypass iOS tracking limits.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Creative A/B Testing</strong>
+                Iterate video vs image angles to uncover winning creatives with highest ROAS.
+              </div>
+              <div class="p-3.5 rounded-xl bg-neutral-950/70 border border-neutral-800">
+                <strong class="text-white block mb-1">Retargeting &amp; Scaling</strong>
+                Recover abandoned carts and re-engage warm audiences with targeted offers.
+              </div>
+            </div>
+            <div class="pt-4">
+              <a href="https://wa.me/8801986494589?text=Hi%20Ibrahim,%20I%20am%20interested%20in%20your%20Meta%20Ads%20Marketing" target="_blank" class="btn-primary text-xs py-2.5 px-6">
+                Inquire for Meta Ads
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="aspect-video rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-950 relative group">
+              <img src="assets/images/project-meta-1.svg" alt="Meta Marketing" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <span class="px-4 py-2 rounded-lg bg-neutral-900/90 text-xs font-bold text-white border border-neutral-700">
+                  Targeted ROAS Scaling
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pricing & Packages Section -->
+  <section class="py-20 bg-neutral-950 border-t border-neutral-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest text-accent font-bold">Flexible Plans</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">
+          Packages &amp; Retainer Tiers
+        </h2>
+        <p class="text-neutral-400 text-sm mt-3">
+          Predictable pricing with flexible on-demand or monthly retainer options to match your exact growth goals.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Tier 1 -->
+        <div class="p-8 rounded-3xl bg-neutral-900 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase tracking-wider text-neutral-400 font-bold">Starter Package</span>
+            <h3 class="font-display text-2xl font-bold text-white mt-1 mb-3">Content Booster</h3>
+            <p class="text-xs text-neutral-400 mb-6">Ideal for emerging creators and individual influencers needing fast, consistent content.</p>
+            <div class="text-3xl font-extrabold text-white mb-6">
+              Custom <span class="text-xs text-neutral-400 font-normal">/ Project Based</span>
+            </div>
+            <ul class="space-y-3 text-xs text-neutral-300 border-t border-neutral-800 pt-6 mb-8">
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> 5x Short-form Reels / Shorts edits</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> 2x High-CTR YouTube Thumbnails</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Captions, Sound FX &amp; Visual Hooks</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> 48-Hour Turnaround</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Unlimited Minor Revisions</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/8801986494589?text=Hi%20Ibrahim,%20I%20am%20interested%20in%20the%20Content%20Booster%20package" target="_blank" class="btn-secondary w-full text-center text-xs py-3">
+            Choose Booster Plan
+          </a>
+        </div>
+
+        <!-- Tier 2 (Featured) -->
+        <div class="p-8 rounded-3xl bg-neutral-900 border-2 border-accent relative shadow-2xl shadow-accent/15 flex flex-col justify-between">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-accent text-white text-[11px] font-extrabold uppercase px-3 py-1 rounded-full shadow-lg">
+            Most Popular Choice
+          </div>
+          <div>
+            <span class="text-xs uppercase tracking-wider text-accent font-bold">Growth Retainer</span>
+            <h3 class="font-display text-2xl font-bold text-white mt-1 mb-3">Brand Scaler</h3>
+            <p class="text-xs text-neutral-400 mb-6">Complete ongoing video and graphic creative engine for active brands and businesses.</p>
+            <div class="text-3xl font-extrabold text-white mb-6">
+              Monthly <span class="text-xs text-neutral-400 font-normal">Retainer</span>
+            </div>
+            <ul class="space-y-3 text-xs text-neutral-300 border-t border-neutral-800 pt-6 mb-8">
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> 15x Short-Form Reels / TikToks</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> 2x Long-Form YouTube Video Edits</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> 6x YouTube Thumbnails or Ad Creatives</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Priority 24-Hour Turnaround</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Dedicated WhatsApp Support Channel</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/8801986494589?text=Hi%20Ibrahim,%20I%20am%20interested%20in%20the%20Brand%20Scaler%20Retainer" target="_blank" class="btn-primary w-full text-center text-xs py-3">
+            Choose Scaler Plan
+          </a>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="p-8 rounded-3xl bg-neutral-900 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase tracking-wider text-neutral-400 font-bold">Performance Tier</span>
+            <h3 class="font-display text-2xl font-bold text-white mt-1 mb-3">Meta Ads + Creatives</h3>
+            <p class="text-xs text-neutral-400 mb-6">Full growth partnership combining high-converting video ad creatives and campaign management.</p>
+            <div class="text-3xl font-extrabold text-white mb-6">
+              Full Funnel <span class="text-xs text-neutral-400 font-normal">/ Monthly</span>
+            </div>
+            <ul class="space-y-3 text-xs text-neutral-300 border-t border-neutral-800 pt-6 mb-8">
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Full Meta Ads Campaign Architecture</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Pixel &amp; CAPI Tracking Verification</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> 8x High-Hook Video Ad Creatives</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Continuous A/B Split Testing &amp; CBO</li>
+              <li class="flex items-center gap-2"><span class="text-accent">✓</span> Weekly Performance &amp; ROAS Reporting</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/8801986494589?text=Hi%20Ibrahim,%20I%20am%20interested%20in%20the%20Meta%20Ads%20Full%20Funnel%20Plan" target="_blank" class="btn-secondary w-full text-center text-xs py-3">
+            Choose Full Funnel Plan
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 bg-[#0a0a0a]">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mb-4">
+        Need a Custom On-Demand Quote?
+      </h3>
+      <p class="text-neutral-400 text-sm mb-6 max-w-xl mx-auto">
+        Have a specific video, batch design, or ad campaign requirement? Message me directly on WhatsApp for an instant consultation.
+      </p>
+      <a href="https://wa.me/8801986494589" target="_blank" class="btn-primary text-sm">
+        Discuss Your Custom Needs
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-950 border-t border-neutral-900 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center font-display font-black text-sm text-white">IH</div>
+        <span class="font-display font-bold text-white text-sm">Ibrahim Hossan</span>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-neutral-400">
+        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="services.html" class="hover:text-white">Services</a>
+        <a href="portfolio.html" class="hover:text-white">Portfolio</a>
+        <a href="about.html" class="hover:text-white">About</a>
+        <a href="contact.html" class="hover:text-white">Contact</a>
+        <a href="admin.html" class="hover:text-accent font-semibold">Admin</a>
+      </div>
+      <div class="text-xs text-neutral-500">&copy; 2026 Ibrahim Hossan. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/8801986494589" target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.54 1.771.82 2.791.82 3.182 0 5.768-2.587 5.768-5.766 0-3.18-2.586-5.766-5.768-5.766zm9.969 5.766c0 5.514-4.486 10-10 10-1.758 0-3.411-.458-4.858-1.258l-5.142 1.346 1.37-5.009c-.886-1.503-1.37-3.238-1.37-5.079 0-5.514 4.486-10 10-10s10 4.486 10 10z"/></svg>
+  </a>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
