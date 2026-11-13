@@ -381,6 +381,36 @@ function initMobileMenu() {
   });
 }
 
+// Automatically extract video thumbnail if no custom thumbnail is provided
+function getVideoAutoThumbnail(videoUrl) {
+  const url = String(videoUrl || '').trim();
+  if (!url) return '';
+
+  // YouTube (watch, shorts, youtu.be, embed, live)
+  const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/i);
+  if (ytMatch) {
+    return `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
+  }
+
+  // Google Drive
+  const gdriveMatch = url.match(/(?:drive\.google\.com\/file\/d\/|drive\.google\.com\/(?:open|uc)\?(?:[^#]*&)?id=)([a-zA-Z0-9_-]+)/i);
+  if (gdriveMatch) {
+    return `https://drive.google.com/thumbnail?id=${gdriveMatch[1]}&sz=w800`;
+  }
+
+  return '';
+}
+
+function resolveProjectThumbnail(item) {
+  const rawThumb = String(item.thumbnail || '').trim();
+  const isGenericPlaceholder = !rawThumb || /^assets\/images\/project-(?:video-[0-9]+|thumb-[0-9]+)\.svg$/i.test(rawThumb);
+  if (isGenericPlaceholder && item.videoUrl) {
+    const auto = getVideoAutoThumbnail(item.videoUrl);
+    if (auto) return auto;
+  }
+  return rawThumb || getVideoAutoThumbnail(item.videoUrl) || 'assets/images/project-video-1.svg';
+}
+
 // Convert standard YouTube / Shorts / Vimeo / Drive URLs to inline playable media descriptors
 function normalizeVideoUrl(rawUrl) {
   const url = String(rawUrl || '').trim();
@@ -441,10 +471,12 @@ function initPortfolio() {
       card.className = 'portfolio-card cursor-pointer';
       const isVideo = Boolean(item.videoUrl);
       const toolsArr = Array.isArray(item.tools) ? item.tools : [];
+      const thumbSrc = resolveProjectThumbnail(item);
+      const autoThumb = item.videoUrl ? getVideoAutoThumbnail(item.videoUrl) : '';
 
       card.innerHTML = `
         <div class="thumb-wrapper">
-          <img src="${escapeHtml(item.thumbnail)}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          <img src="${escapeHtml(thumbSrc)}" alt="${escapeHtml(item.title)}" loading="lazy" ${autoThumb && autoThumb !== thumbSrc ? `onerror="this.onerror=null;this.src='${escapeHtml(autoThumb)}';"` : ''} />
           ${isVideo ? `
             <div class="play-badge">
               <svg class="w-6 h-6 fill-current translate-x-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -542,9 +574,11 @@ function openModal(item) {
 
   if (item.videoUrl) {
     const media = normalizeVideoUrl(item.videoUrl);
+    const isVerticalReel = /\/shorts\//i.test(item.videoUrl);
+
     if (media.type === 'mp4') {
       mediaContainer.innerHTML = `
-        <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-neutral-800">
+        <div class="relative w-full ${isVerticalReel ? 'max-w-[340px] mx-auto' : 'aspect-video'} bg-black rounded-lg overflow-hidden border border-neutral-800" ${isVerticalReel ? 'style="aspect-ratio: 9/16;"' : ''}>
           <video src="${escapeHtml(media.src)}" class="w-full h-full" controls autoplay playsinline controlsList="nodownload" oncontextmenu="return false"></video>
         </div>
       `;
@@ -553,7 +587,7 @@ function openModal(item) {
         videoEl.addEventListener('error', () => {
           if (!modal.classList.contains('active')) return;
           mediaContainer.innerHTML = `
-            <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-neutral-800">
+            <div class="relative w-full ${isVerticalReel ? 'max-w-[340px] mx-auto' : 'aspect-video'} bg-black rounded-lg overflow-hidden border border-neutral-800" ${isVerticalReel ? 'style="aspect-ratio: 9/16;"' : ''}>
               <iframe src="${escapeHtml(media.fallbackIframe)}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
           `;
@@ -561,15 +595,16 @@ function openModal(item) {
       }
     } else {
       mediaContainer.innerHTML = `
-        <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-neutral-800">
+        <div class="relative w-full ${isVerticalReel ? 'max-w-[340px] mx-auto' : 'aspect-video'} bg-black rounded-lg overflow-hidden border border-neutral-800" ${isVerticalReel ? 'style="aspect-ratio: 9/16;"' : ''}>
           <iframe src="${escapeHtml(media.src)}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       `;
     }
   } else {
+    const displayImg = item.imageUrl || resolveProjectThumbnail(item);
     mediaContainer.innerHTML = `
       <div class="relative w-full aspect-video bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 flex items-center justify-center">
-        <img src="${escapeHtml(item.imageUrl || item.thumbnail)}" alt="${escapeHtml(item.title)}" class="max-h-full max-w-full object-contain" />
+        <img src="${escapeHtml(displayImg)}" alt="${escapeHtml(item.title)}" class="max-h-full max-w-full object-contain" />
       </div>
     `;
   }

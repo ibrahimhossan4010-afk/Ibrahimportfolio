@@ -344,6 +344,36 @@ function renderAllDashboardSections() {
   renderInquiriesManager();
 }
 
+// Automatically extract video thumbnail if no custom thumbnail is provided
+function getVideoAutoThumbnail(videoUrl) {
+  const url = String(videoUrl || '').trim();
+  if (!url) return '';
+
+  // YouTube (watch, shorts, youtu.be, embed, live)
+  const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/i);
+  if (ytMatch) {
+    return `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
+  }
+
+  // Google Drive
+  const gdriveMatch = url.match(/(?:drive\.google\.com\/file\/d\/|drive\.google\.com\/(?:open|uc)\?(?:[^#]*&)?id=)([a-zA-Z0-9_-]+)/i);
+  if (gdriveMatch) {
+    return `https://drive.google.com/thumbnail?id=${gdriveMatch[1]}&sz=w800`;
+  }
+
+  return '';
+}
+
+function resolveProjectThumbnail(item) {
+  const rawThumb = String(item.thumbnail || '').trim();
+  const isGenericPlaceholder = !rawThumb || /^assets\/images\/project-(?:video-[0-9]+|thumb-[0-9]+)\.svg$/i.test(rawThumb);
+  if (isGenericPlaceholder && item.videoUrl) {
+    const auto = getVideoAutoThumbnail(item.videoUrl);
+    if (auto) return auto;
+  }
+  return rawThumb || getVideoAutoThumbnail(item.videoUrl) || 'assets/images/project-video-1.svg';
+}
+
 function renderSidebarAndOverview() {
   const p = siteData.profile || {};
   const projects = siteData.portfolio || [];
@@ -398,7 +428,7 @@ function renderSidebarAndOverview() {
     recentProjEl.innerHTML = projects.slice(0, 4).map(proj => `
       <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-neutral-900/60 border border-neutral-800">
         <div class="flex items-center gap-3 min-w-0">
-          <img src="${escapeHtml(proj.thumbnail)}" alt="" class="w-12 h-9 rounded-lg object-cover bg-neutral-950 flex-shrink-0">
+          <img src="${escapeHtml(resolveProjectThumbnail(proj))}" alt="" class="w-12 h-9 rounded-lg object-cover bg-neutral-950 flex-shrink-0">
           <div class="min-w-0">
             <div class="text-xs font-bold text-white truncate">${escapeHtml(proj.title)}</div>
             <div class="text-[11px] text-accent font-medium">${escapeHtml(proj.categoryLabel)}</div>
@@ -453,7 +483,7 @@ function renderPortfolioManager() {
     <div class="admin-card overflow-hidden flex flex-col justify-between group">
       <div>
         <div class="relative aspect-video bg-neutral-950 overflow-hidden border-b border-neutral-800">
-          <img src="${escapeHtml(item.thumbnail)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="${escapeHtml(resolveProjectThumbnail(item))}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <span class="absolute top-3 left-3 text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/75 text-white backdrop-blur-sm">
             ${escapeHtml(item.categoryLabel)}
           </span>
@@ -498,13 +528,14 @@ window.openProjectModal = function(projectId = null) {
       document.getElementById('proj-metrics').value = existing.metrics || '';
       document.getElementById('proj-tools').value = (existing.tools || []).join(', ');
       document.getElementById('proj-video-url').value = existing.videoUrl || '';
-      document.getElementById('proj-thumb-url').value = existing.thumbnail || '';
+      document.getElementById('proj-thumb-url').value = resolveProjectThumbnail(existing);
       document.getElementById('proj-desc').value = existing.description || '';
     }
   } else {
     heading.textContent = 'Add New Project';
     document.getElementById('proj-id').value = '';
-    document.getElementById('proj-thumb-url').value = 'assets/images/project-video-1.svg';
+    document.getElementById('proj-thumb-url').value = '';
+    document.getElementById('proj-thumb-url').placeholder = 'Auto-fetched from video or upload image';
   }
 
   modal.classList.add('active');
@@ -769,6 +800,20 @@ function initFormHandlers() {
     }
   });
 
+  // Auto-fill video thumbnail on video URL input if no custom image
+  document.getElementById('proj-video-url')?.addEventListener('input', (e) => {
+    const vUrl = e.target.value.trim();
+    const thumbInput = document.getElementById('proj-thumb-url');
+    if (vUrl && thumbInput) {
+      const cur = thumbInput.value.trim();
+      const isPlaceholder = !cur || /^assets\/images\/project-(?:video-[0-9]+|thumb-[0-9]+)\.svg$/i.test(cur) || cur.includes('img.youtube.com') || cur.includes('drive.google.com/thumbnail');
+      if (isPlaceholder) {
+        const auto = getVideoAutoThumbnail(vUrl);
+        if (auto) thumbInput.value = auto;
+      }
+    }
+  });
+
   // Save Profile Form
   document.getElementById('profile-editor-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -799,8 +844,16 @@ function initFormHandlers() {
     const catLabels = { video: 'Video Editing', graphics: 'Graphics Design', meta: 'Meta Marketing' };
     const toolsRaw = document.getElementById('proj-tools').value;
     const tools = toolsRaw.split(',').map(s => s.trim()).filter(Boolean);
-    const thumb = document.getElementById('proj-thumb-url').value.trim();
+    let thumb = document.getElementById('proj-thumb-url').value.trim();
     const videoUrl = document.getElementById('proj-video-url').value.trim();
+
+    if ((!thumb || /^assets\/images\/project-(?:video-[0-9]+|thumb-[0-9]+)\.svg$/i.test(thumb)) && videoUrl) {
+      const auto = getVideoAutoThumbnail(videoUrl);
+      if (auto) thumb = auto;
+    }
+    if (!thumb) {
+      thumb = 'assets/images/project-video-1.svg';
+    }
 
     const payload = {
       id: idVal ? Number(idVal) : Date.now(),
